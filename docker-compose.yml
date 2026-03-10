@@ -1,9 +1,13 @@
-version: '3.8'
+version: "3.8"
 
 services:
   web:
-    image: php:8.3-apache
+    # Cambiamos 'image' por 'build' y apuntamos al directorio actual (donde está el Dockerfile)
+    build: .
+    # Opcional: Le damos un nombre limpio al contenedor para que sea fácil referenciarlo en la consola
+    container_name: mi_app_php
     ports:
       - "8081:80"
     volumes:
+      # Sincronizamos los archivos de WSL con el contenedor
       - ./:/var/www/html
