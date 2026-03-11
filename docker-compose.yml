@@ -1,13 +1,13 @@
-version: "3.8"
-
 services:
   web:
-    # Cambiamos 'image' por 'build' y apuntamos al directorio actual (donde está el Dockerfile)
-    build: .
-    # Opcional: Le damos un nombre limpio al contenedor para que sea fácil referenciarlo en la consola
+    build:
+      # El 'context' es la carpeta desde donde Docker va a trabajar. 
+      # Dejamos el punto (.) para que tenga acceso a toda la raíz de tu proyecto.
+      context: .
+      # Aquí le indicamos la ruta exacta de dónde leer las instrucciones
+      dockerfile: .docker/php/Dockerfile
     container_name: mi_app_php
     ports:
       - "8081:80"
     volumes:
-      # Sincronizamos los archivos de WSL con el contenedor
       - ./:/var/www/html
