@@ -1,13 +1,34 @@
 services:
   web:
     build:
-      # El 'context' es la carpeta desde donde Docker va a trabajar. 
-      # Dejamos el punto (.) para que tenga acceso a toda la raíz de tu proyecto.
       context: .
-      # Aquí le indicamos la ruta exacta de dónde leer las instrucciones
       dockerfile: .docker/php/Dockerfile
     container_name: mi_app_php
     ports:
       - "8081:80"
     volumes:
       - ./:/var/www/html
+    # Esto le dice a Docker que no levante PHP hasta que SQL Server esté listo
+    depends_on:
+      - db
+
+  db:
+    # Imagen oficial de SQL Server 2019 para Linux
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sql_server_2019
+    environment:
+      # Obligatorio: Aceptar la licencia de uso de Microsoft
+      ACCEPT_EULA: "Y"
+      # Obligatorio: La contraseña del usuario 'sa' (System Administrator). 
+      # Microsoft exige que sea FUERTE (mayúsculas, minúsculas, números y símbolos) o el contenedor se apagará solo.
+      MSSQL_SA_PASSWORD: "PasswordFuerte123!" 
+    ports:
+      # Mapeamos el puerto estándar de SQL Server
+      - "1433:1433"
+    volumes:
+      # Persistencia: guardamos los datos de la DB fuera del contenedor para no perderlos
+      - sqlserver_data:/var/opt/mssql
+
+# Declaramos el volumen nombrado que usamos arriba
+volumes:
+  sqlserver_data:

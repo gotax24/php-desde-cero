@@ -13,15 +13,15 @@
   <h2>Completas</h2>
   <ul>
     <?php foreach ($tareasCompletas as $tarea): ?>
-      <li><?= $tarea['title'] ?></li>
+      <li style="color: <?= $tarea-> color ?>;"><?= $tarea->title ?></li>
     <?php endforeach ?>
     <li>Estudiar</li>
-    <li>PHP</li>
+    <li>Ingles</li>
   </ul>
   <h2>Incompletas</h2>
   <ul>
-    <?php foreach ($tareasIncompletas as $tareas): ?>
-      <li><?= $tarea['title'] ?></li>
+    <?php foreach ($tareasIncompletas as $tarea): ?>
+      <li style="color: <?= $tarea->color ?>;"><?= $tarea->title ?></li>
     <?php endforeach ?>
     <li>Estudiar</li>
     <li>Nodejs</li>
