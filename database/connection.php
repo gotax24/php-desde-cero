@@ -2,18 +2,12 @@
 class Connection
 {
   //cuando es estatico no necesita una instancia del objeto para conectarse
-  public static function  start()
+  public static function  start($config)
   {
-
-    $server = "sql_server_2019";
-    $database = "prueba";
-    $user = "sa";
-    $password = "PasswordFuerte123!";
-
-    $dns = "sqlsrv:Server=$server;Database=$database;TrustServerCertificate=true";
+    $dns = "{$config['type']}:Server={$config['server']};Database={$config['database']};TrustServerCertificate=true";
 
     try {
-      return new PDO($dns, $user, $password);
+      return new PDO($dns, $config['user'], $config['password']);
     } catch (PDOException $error) {
       echo "Error de conexion: " . $error->getMessage();
     }
