@@ -7,5 +7,8 @@
 </head>
 <body>
   <h1>Servicios</h1>
+
+  <?php require('partials/menu.php'); ?>
+
 </body>
 </html>

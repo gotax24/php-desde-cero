@@ -10,11 +10,7 @@
 <body>
   <h1>Hola <?= $name; ?></h1>
 
-  <nav>
-    <a href="contact">Contacto</a>
-    <a href="about">Nosotros</a>
-    <a href="services">Servicios</a>
-  </nav>
+  <?php require('partials/menu.php'); ?>
 
   <h2>Completas</h2>
   <ul>
