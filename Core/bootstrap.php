@@ -1,18 +1,18 @@
 <?php
-
 require 'Router.php';
-$config = require './config.php';
 require 'database/connection.php';
 require 'database/QueryBuilder.php';
 require 'functions.php';
 require 'Request.php';
 require 'Models/Task.php';
+require 'App.php';
 
-if ($config['error_handling']) {
+App::set('config', require 'config.php');
+
+App::set('database', new QueryBuilder(Connection::start(App::get('config')['database'])));
+
+if (App::get('config')['error_handling']) {
   ini_set('display_errors', 1);
   ini_set('display_startup_errors', 1);
   error_reporting(E_ALL);
 }
-
-$pdo = Connection::start($config['database']);
-return $query = new QueryBuilder($pdo);

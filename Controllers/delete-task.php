@@ -1,4 +1,4 @@
 <?php
-$query->delete('task', $_POST['id']);
+App::get('database')->delete('task', $_POST['id']);
 
 header('Location: /');

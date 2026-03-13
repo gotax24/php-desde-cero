@@ -1,6 +1,5 @@
 <?php
-
-$query = require 'Core/bootstrap.php';
+require 'Core/bootstrap.php';
 $routes = require __DIR__ . '/routes.php';
 $url = Request::url();
 

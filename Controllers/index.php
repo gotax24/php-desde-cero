@@ -1,6 +1,6 @@
 <?php
 
-$tasks = $query->selectAll('task', 'Task');
+$tasks = App::get('database')->selectAll('task', 'Task');
 $name = "Ernesto";
 
 $tareasCompletas = array_filter($tasks, function ($task) {

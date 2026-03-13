@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-
-<body>
+  <?php require('partials/header.php') ?>
   <h1>Hola <?= $name; ?></h1>
-
-  <?php require('partials/menu.php'); ?>
 
   <h2>Completas</h2>
   <ul>
@@ -53,6 +43,5 @@
     <input type="radio" name="completed">
     <button type="submit">Guardar</button>
   </form>
-</body>
 
-</html>
+  <?php require('partials/footer.php') ?>

@@ -1,5 +1,5 @@
 <?php
-$query->update('task', $_POST['id'], [
+App::get('database')->update('task', $_POST['id'], [
   'completed' => $_POST['completed']
 ]);
 
