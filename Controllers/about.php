@@ -1,4 +1,4 @@
 <?php
 //operaciones
 
-require '../Views/about.view.php';
+require __DIR__ .'/../Views/about.view.php';

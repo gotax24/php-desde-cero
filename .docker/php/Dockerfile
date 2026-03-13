@@ -25,4 +25,10 @@ RUN curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor
     && docker-php-ext-enable sqlsrv pdo_sqlsrv \
     && rm -rf /var/lib/apt/lists/*
 
+# Habilitar mod_rewrite ( necesario para rutas amigables en .htaccess)
+RUN a2enmod rewrite
+
+# Copiar configuración personalizada de Apache
+COPY .docker/php/conf.d/001-front-controller.conf /etc/apache2/conf-enabled/001-front-controller.conf
+
 WORKDIR /var/www/html
