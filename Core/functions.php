@@ -1,5 +1,4 @@
 <?php
-require './segundo-modulo/Models/Task.php';
 
 function dd($value)
 {

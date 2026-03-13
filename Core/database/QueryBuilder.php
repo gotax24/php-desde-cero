@@ -29,7 +29,7 @@ class QueryBuilder
       //['name'] => '[jhon']
       $query->execute($params);
     } catch (PDOException $error) {
-      dd($error->getMessage());
+      $error->getMessage();
     }
   }
 
@@ -44,7 +44,7 @@ class QueryBuilder
       $query = $this->pdo->prepare($sql);
       $query->execute([...$params, 'id' => $id]);
     } catch (PDOException $error) {
-      dd($error->getMessage());
+      $error->getMessage();
     }
   }
 
@@ -54,7 +54,7 @@ class QueryBuilder
       $query = $this->pdo->prepare($sql);
       $query->execute([$id]);
     } catch (PDOException $error) {
-      dd($error->getMessage());
+      $error->getMessage();
     }
   }
 }
