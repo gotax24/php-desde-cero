@@ -35,18 +35,24 @@ class QueryBuilder
 
   public function update($table, $id, $params){
     $cols = array_keys($params);
-    $cols = array_map(function ($col) {
+    $cols = implode(', ', array_map(function ($col) {
       return "{$col} = :{$col}";
-    }, $cols);
+    }, $cols));
 
-    $placeholders = ':' . implode(', :', array_keys($params));
-
-    $sql = "UPDATE dbo.$table SET completed = $placeholders WHERE id = $id";
+    $sql = "UPDATE dbo.$table SET {$cols}  WHERE id = :id";
     try {
       $query = $this->pdo->prepare($sql);
-      // :name
-      //['name'] => '[jhon']
-      $query->execute($params);
+      $query->execute([...$params, 'id' => $id]);
+    } catch (PDOException $error) {
+      dd($error->getMessage());
+    }
+  }
+
+  public function delete($table, $id){
+    $sql = "DELETE FROM $table WHERE id = ?";
+    try {
+      $query = $this->pdo->prepare($sql);
+      $query->execute([$id]);
     } catch (PDOException $error) {
       dd($error->getMessage());
     }
