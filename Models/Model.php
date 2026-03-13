@@ -1,5 +1,6 @@
 <?php
-class Model{
+class Model
+{
   /* forma vieja de hacerlo   
   public $title;
   public $completed;
@@ -13,9 +14,26 @@ class Model{
 
   //(Constructor propertypromotion) forma nueva
   //public function __construct(
-    //public $title = '',
-    //public $completed = false
+  //public $title = '',
+  //public $completed = false
   //) {}
+
+  protected $property;
+  protected $properties = [];
+  protected $table;
+
+  public function __construct($property = [])
+  {
+    $this->property = $property;
+  }
+
+  public static function create($properties = [])
+  {
+    $model = new static($properties);
+    $model->save();
+
+    return $model;
+  }
 
   public function buildString()
   {
@@ -34,10 +52,16 @@ class Model{
     $this->completed = true;
   }
 
-  public function save($name)
+  public function save()
   {
-    $file = fopen($name, 'w');
-    fwrite($file, $this->buildString());
-    fclose($file);
+    if (empty($this->table)) {
+      throw new Exception("El nombre de la tabla no ha sido definido");
+    }
+
+    App::get('database')->create($this->table, $this->properties, [
+      'title' => $_POST['title'] ?? 'Sin titulo',
+      'color' => $_POST['color'] ?? '#ea7676ec',
+      'completed' => $_POST['completed'] ?? 0
+    ]);
   }
 }

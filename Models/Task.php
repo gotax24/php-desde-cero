@@ -12,6 +12,8 @@ class Task extends Model
    * ){}
    */
 
+  protected $table = 'taks';
+
   public function complete()
   {
     $this->completed = true;
