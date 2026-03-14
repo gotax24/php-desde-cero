@@ -8,4 +8,7 @@ return [
   'tasks/create' => __DIR__ . '/Controllers/create-task.php',
   'tasks/toggle' => __DIR__ . '/Controllers/toggle-task.php',
   'tasks/delete' => __DIR__ . '/Controllers/delete-task.php',
+  'login-form' => __DIR__ . '/Controllers/login-form.php',
+  'login' => __DIR__ . '/Controllers/login.php',
+  'logout' => __DIR__ . '/Controllers/logout.php'
 ];

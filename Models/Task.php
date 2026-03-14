@@ -5,19 +5,7 @@ require_once __DIR__ . '/Model.php';
 
 class Task extends Model
 {
-  /**
-   * public function __constructor(
-   * public $title,
-   * public $complete = false
-   * ){}
-   */
-
-  protected $table = 'taks';
-
-  public function complete()
-  {
-    $this->completed = true;
-  }
+  protected $table = 'task';
 
   public function setColor($color)
   {

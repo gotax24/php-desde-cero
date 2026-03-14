@@ -18,13 +18,12 @@ class Model
   //public $completed = false
   //) {}
 
-  protected $property;
   protected $properties = [];
   protected $table;
 
-  public function __construct($property = [])
+  public function __construct($properties = [])
   {
-    $this->property = $property;
+    $this->properties = $properties;
   }
 
   public static function create($properties = [])
@@ -35,27 +34,51 @@ class Model
     return $model;
   }
 
-  public function buildString()
+  public static function all()
   {
-    $me = new ReflectionClass($this);
-    $properties = $me->getProperties();
-
-    foreach ($properties as $value) {
-      var_dump($value->name);
-    }
-
-    return "Titulo: {$this->title} \n Completo: " . ($this->completed ? 'Si' : 'No');
+    $model = new static;
+    $rows = App::get('database')->selectAll($model->getTable());
+    
+    return array_map(fn($row) => new static($row), $rows);
   }
 
-  public function isComplete()
+  public function update($properties)
   {
-    $this->completed = true;
+    App::get('database')->update($this->getTable(), $this->properties['id'], $properties);
+    $this->setPropierties($properties);
+
+    return $this;
+  }
+
+  public function delete()
+  {
+    App::get('database')->delete($this->getTable(), $this->properties['id']);
+
+    return $this;
+  }
+
+
+  public static function find($id)
+  {
+    $model = new static;
+    $properties = App::get('database')->find($model->getTable(), $id);
+    $model->setPropierties($properties);
+
+    return $model;
+  }
+
+  public static function findBy($params)
+  {
+    $model = new static;
+    $rows = App::get('database')->findBy($model->getTable(), $params);
+    
+    return array_map(fn($row) => new static($row), $rows);
   }
 
   public function save()
   {
     if (empty($this->table)) {
-      throw new Exception("El nombre de la tabla no ha sido definido");
+      throw new Exception("El nombre de la tabla no ha sido definido", 1);
     }
 
     App::get('database')->create($this->table, $this->properties, [
@@ -63,5 +86,26 @@ class Model
       'color' => $_POST['color'] ?? '#ea7676ec',
       'completed' => $_POST['completed'] ?? 0
     ]);
+  }
+
+  public function getTable()
+  {
+    return $this->table;
+  }
+
+  public function setPropierties($properties)
+  {
+    $this->properties = array_merge($this->properties, $properties);
+  }
+
+  //metodo magico 
+  public function __get($name){
+    if(array_key_exists($name, $this->properties)){
+      return $this->properties[$name];
+    }
+
+    throw new Exception("La propiedad $name no existe ", 1);
+    
+    return null;
   }
 }

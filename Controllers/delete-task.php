@@ -1,4 +1,5 @@
 <?php
-App::get('database')->delete('task', $_POST['id']);
+$task = Task::find($_POST['id']);
+$task->delete();
 
 header('Location: /');

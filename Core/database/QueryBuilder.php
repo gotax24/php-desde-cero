@@ -9,13 +9,36 @@ class QueryBuilder
     $this->pdo = $pdo;
   }
 
-  public function selectAll($table, $class)
+  public function selectAll($table)
   {
     $query = $this->pdo->prepare("select * from dbo.$table");
     $query->execute();
 
-    return $query->fetchAll(PDO::FETCH_CLASS, $class);
+    return $query->fetchAll(PDO::FETCH_ASSOC);
   }
+
+  public function find($table, $id)
+  {
+    $query = $this->pdo->prepare("SELECT * FROM dbo.$table WHERE id = ?");
+
+    $query->execute([$id]);
+
+    return $query->fetch(PDO::FETCH_ASSOC);
+  }
+
+  public function findBy($table, $params)
+  {
+    $cols = array_keys($params);
+    $cols = implode(' AND ', array_map(function ($col) {
+      return "{$col} = :{$col}";
+    }, $cols));
+
+    $query = $this->pdo->prepare("SELECT * FROM dbo.$table WHERE {$cols}");
+    $query->execute($params);
+
+    return $query->fetchAll(PDO::FETCH_ASSOC);
+  }
+
 
   public function create($table, $params)
   {
@@ -33,7 +56,8 @@ class QueryBuilder
     }
   }
 
-  public function update($table, $id, $params){
+  public function update($table, $id, $params)
+  {
     $cols = array_keys($params);
     $cols = implode(', ', array_map(function ($col) {
       return "{$col} = :{$col}";
@@ -48,7 +72,8 @@ class QueryBuilder
     }
   }
 
-  public function delete($table, $id){
+  public function delete($table, $id)
+  {
     $sql = "DELETE FROM $table WHERE id = ?";
     try {
       $query = $this->pdo->prepare($sql);
