@@ -1,4 +1,7 @@
 <?php
+
+namespace App\Models;
+
 class Model
 {
   /* forma vieja de hacerlo   

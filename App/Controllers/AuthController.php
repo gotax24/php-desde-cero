@@ -1,5 +1,7 @@
 <?php
 
+use Core\Auth;
+
 class AuthController
 {
 

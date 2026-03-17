@@ -1,5 +1,8 @@
 <?php
 
+use  App;
+use App\Models\Task;
+
 class TaskController
 {
   public function create()

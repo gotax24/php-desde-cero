@@ -1,4 +1,10 @@
 <?php
+
+namespace Core\Database;
+
+use PDO;
+use PDOException;
+
 class Connection
 {
   //cuando es estatico no necesita una instancia del objeto para conectarse
