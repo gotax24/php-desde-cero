@@ -1,7 +1,7 @@
 # Usamos la misma imagen base
 FROM php:8.3-apache
 
-# 1. Instalamos dependencias básicas y Composer
+#Instalamos dependencias básicas y Composer
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
+#copiamos el bin de composer para optimizar el peso
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # 2. Instalamos los Drivers de Microsoft ODBC y las extensiones de PHP para SQL Server

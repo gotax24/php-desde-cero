@@ -1,6 +1,7 @@
 {
   "name": "root/html",
   "type": "project",
+<<<<<<< HEAD
   "authors": [
     {
       "name": "Ernesto Bracho R."
@@ -14,6 +15,12 @@
     },
     "files": [
       "Core/functions.php"
+=======
+  "require": {},
+  "autoload": {
+    "classmap": [
+      "./"
+>>>>>>> af21ab8 (actualizando)
     ]
   }
 }
