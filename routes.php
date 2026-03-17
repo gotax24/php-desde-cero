@@ -1,14 +1,14 @@
 <?php
 
 return [
-  '' => __DIR__ . '/Controllers/index.php',
-  'about' => __DIR__ . '/Controllers/about.php',
-  'contact' => __DIR__ . '/Controllers/contact.php',
-  'services' => __DIR__ . '/Controllers/services.php',
-  'tasks/create' => __DIR__ . '/Controllers/create-task.php',
-  'tasks/toggle' => __DIR__ . '/Controllers/toggle-task.php',
-  'tasks/delete' => __DIR__ . '/Controllers/delete-task.php',
-  'login-form' => __DIR__ . '/Controllers/login-form.php',
-  'login' => __DIR__ . '/Controllers/login.php',
-  'logout' => __DIR__ . '/Controllers/logout.php'
+  '' => ['HomeController', 'show'],
+  'about' =>  ['PagesController', 'about'],
+  'contact' =>  ['PagesController', 'contact'],
+  'services' =>  ['PagesController', 'services'],
+  'tasks/create' =>  ['TaskController', 'create'],
+  'tasks/toggle' =>  ['TaskController', 'toggle'],
+  'tasks/delete' =>  ['TaskController', 'delete'],
+  'login-form' =>  ['AuthController', 'show'],
+  'login' =>  ['AuthController', 'login'],
+  'logout' =>  ['AuthController', 'logout']
 ];

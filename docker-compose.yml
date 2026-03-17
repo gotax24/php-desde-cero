@@ -8,27 +8,31 @@ services:
       - "8081:80"
     volumes:
       - ./:/var/www/html
-    # Esto le dice a Docker que no levante PHP hasta que SQL Server esté listo
     depends_on:
       - db
 
   db:
-    # Imagen oficial de SQL Server 2019 para Linux
     image: mcr.microsoft.com/mssql/server:2019-latest
     container_name: sql_server_2019
     environment:
-      # Obligatorio: Aceptar la licencia de uso de Microsoft
       ACCEPT_EULA: "Y"
-      # Obligatorio: La contraseña del usuario 'sa' (System Administrator). 
-      # Microsoft exige que sea FUERTE (mayúsculas, minúsculas, números y símbolos) o el contenedor se apagará solo.
       MSSQL_SA_PASSWORD: "PasswordFuerte123!" 
     ports:
-      # Mapeamos el puerto estándar de SQL Server
       - "1433:1433"
     volumes:
-      # Persistencia: guardamos los datos de la DB fuera del contenedor para no perderlos
       - sqlserver_data:/var/opt/mssql
 
-# Declaramos el volumen nombrado que usamos arriba
+  # 🚀 EL TRUCO: Contenedor efímero para Composer
+  composer:
+    image: composer:latest
+    container_name: mi_app_composer
+    volumes:
+      # Mapeamos tu código a la carpeta /app (el estándar de la imagen de Composer)
+      - ./:/app
+    # 🪄 LA MAGIA DEL UID: 1000 es el número de tu usuario 'ernesto' en WSL
+    user: "1000:1000"
+    # Esta línea evita que el contenedor se quede encendido sin hacer nada
+    profiles: ["cli-only"]
+
 volumes:
   sqlserver_data:

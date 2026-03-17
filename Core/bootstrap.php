@@ -1,14 +1,4 @@
 <?php
-require 'database/connection.php';
-require 'database/QueryBuilder.php';
-require 'Models/Users.php';
-require 'Models/Task.php';
-require 'Router.php';
-require 'functions.php';
-require 'Request.php';
-require 'App.php';
-require 'Auth.php';
-
 App::set('config', require 'config.php');
 
 App::set('database', new QueryBuilder(Connection::start(App::get('config')['database'])));
