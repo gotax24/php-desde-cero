@@ -1,26 +1,24 @@
 {
   "name": "root/html",
   "type": "project",
-<<<<<<< HEAD
   "authors": [
     {
-      "name": "Ernesto Bracho R."
+      "name": "Ernesto Bracho R.",
+      "email": "dev.ejbr@gmail.com"
     }
   ],
-  "require": {},
+  "require": {
+    "php-units-of-measure/php-units-of-measure": "2.2",
+    "artack/color": "0.6.0",
+    "pecee/simple-router": "^5.4"
+  },
   "autoload": {
     "psr-4": {
       "App\\": "App",
       "Core\\": "Core"
     },
     "files": [
-      "Core/functions.php"
-=======
-  "require": {},
-  "autoload": {
-    "classmap": [
-      "./"
->>>>>>> af21ab8 (actualizando)
+      "functions.php"
     ]
   }
 }

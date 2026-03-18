@@ -1,7 +1,8 @@
 <?php
-use Core\App;
-use Core\Database\Connection;
-use Core\Database\QueryBuilder;
+
+use App\Core\App;
+use App\Core\Database\Connection;
+use App\Core\Database\QueryBuilder;
 
 App::set('config', require 'config.php');
 

@@ -1,11 +1,13 @@
 <?php
-require_once __DIR__ . '/Model.php';
 
 namespace App\Models;
+
+use App\Models\Model;
 
 class Task extends Model
 {
   protected $table = 'task';
+  protected $color;
 
   public function setColor($color)
   {

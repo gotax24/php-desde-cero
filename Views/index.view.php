@@ -6,13 +6,13 @@
   <?php foreach ($tareasCompletas as $tarea): ?>
     <li style="color: <?= $tarea->color ?>;">
       <?= $tarea->title ?>
-      <form style="display: inline;" action="/tasks/toggle" method="POST">
+      <form style="display: inline;" action="/tasks/toggle/<?= $tarea->id ?>" method="POST">
         <input type="hidden" name="completed" value="0">
-        <input type="hidden" name="id" value="<?= $tarea->id ?>">
         <button>✔</button>
       </form>
-      <form onsubmit="return confirm('Estas seguro de eliminar la tarea');" style="display: inline;" action="/tasks/delete" method="POST">
-        <input type="hidden" name="id" value="<?= $tarea->id ?>">
+      <form onsubmit="return confirm('Estas seguro de eliminar la tarea');" 
+      style="display: inline;" action="/tasks/delete/<?= $tarea->id ?>" method="POST">
+  
         <button>eliminar</button>
       </form>
     </li>
@@ -23,13 +23,12 @@
   <?php foreach ($tareasIncompletas as $tarea): ?>
     <li style="color: <?= $tarea->color ?>;">
       <?= $tarea->title ?>
-      <form style="display: inline;" action="/tasks/toggle" method="POST">
+      <form style="display: inline;" action="/tasks/toggle/<?= $tarea->id ?>" method="POST">
         <input type="hidden" name="completed" value="1">
-        <input type="hidden" name="id" value="<?= $tarea->id ?>">
         <button>👀</button>
       </form>
-      <form onsubmit="return confirm('Estas seguro de eliminar la tarea');" style="display: inline;" action="/tasks/delete" method="POST">
-        <input type="hidden" name="id" value="<?= $tarea->id ?>">
+      <form onsubmit="return confirm('Estas seguro de eliminar la tarea');" 
+      style="display: inline;" action="/tasks/delete/<?= $tarea->id ?>" method="POST">
         <button>eliminar</button>
       </form>
     </li>

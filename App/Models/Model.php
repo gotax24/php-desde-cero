@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Core\App;
+use Exception;
+
 class Model
 {
   /* forma vieja de hacerlo   

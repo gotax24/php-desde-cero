@@ -1,6 +1,8 @@
 <?php
 
+namespace App\Core;
 
+use Exception;
 
 class Router
 {
@@ -23,14 +25,14 @@ class Router
       $controller = $this->routes[$url][0];
       $method = $this->routes[$url][1];
 
-      $controller = "App\\Controller\\{$controller}";
+      $controller = "App\\Controllers\\{$controller}";
 
       if (!class_exists($controller)) {
-        throw new \Exception("El controlador {$controller} no existe", 1);
+        throw new Exception("El controlador {$controller} no existe", 1);
       }
 
       if (!method_exists($controller, $method)) {
-        throw new \Exception("El metodo {$method} no existe", 1);
+        throw new Exception("El metodo {$method} no existe", 1);
       }
 
       return (new $controller)->$method();

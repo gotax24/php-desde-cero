@@ -1,5 +1,4 @@
 <?php
-require_once __DIR__ . '/Model.php';
 
 namespace App\Models;
 

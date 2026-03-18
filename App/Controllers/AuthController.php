@@ -1,6 +1,8 @@
 <?php
 
-use Core\Auth;
+namespace App\Controllers;
+
+use App\Core\Auth;
 
 class AuthController
 {

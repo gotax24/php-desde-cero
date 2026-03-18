@@ -1,6 +1,8 @@
 <?php
 
-use  App;
+namespace App\Controllers;
+
+use App\Core\App;
 use App\Models\Task;
 
 class TaskController
@@ -17,9 +19,9 @@ class TaskController
     return redirect('/');
   }
 
-  public function toggle()
+  public function toggle($taskId)
   {
-    $task = Task::find($_POST['id']);
+    $task = Task::find($taskId);
     $task->update([
       'completed' => $_POST['completed']
     ]);
@@ -27,9 +29,9 @@ class TaskController
     return redirect('/');
   }
 
-  public function delete()
+  public function delete($taskId)
   {
-    $task = Task::find($_POST['id']);
+    $task = Task::find($taskId);
     $task->delete();
 
     return redirect('/');
