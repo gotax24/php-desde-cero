@@ -1,12 +1,8 @@
 <?php
 
 use App\Core\App;
-use App\Core\Database\Connection;
-use App\Core\Database\QueryBuilder;
 
 App::set('config', require 'config.php');
-
-App::set('database', new QueryBuilder(Connection::start(App::get('config')['database'])));
 
 if (App::get('config')['error_handling']) {
   ini_set('display_errors', 1);

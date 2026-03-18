@@ -2,17 +2,21 @@
 
 namespace App\Models;
 
-use App\Models\Model;
+use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
 {
-  protected $table = 'task';
+  public $timestamps = false;
+  
   protected $color;
+  protected $fillable = [
+    'title',
+    'color',
+    'completed'
+  ];
 
   public function setColor($color)
   {
     $this->color = $color;
   }
 }
-
-

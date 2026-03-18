@@ -2,17 +2,17 @@
 
 namespace App\Core;
 
-Use App\Models\Users;
+use Users;
 
 class Auth
 {
  public static function tryLogin($email, $password)
   {
-    $user = Users::findBy(['email' => $email]);
-    if (!empty($user) && password_verify($password, $user[0]->password)) {
-      $_SESSION['email'] = $user[0]->email;
-      $_SESSION['name'] = $user[0]->name;
-      $_SESSION['id'] = $user[0]->id;
+    $user = Users::where('email', $email)->first();
+    if (!empty($user) && password_verify($password, $user->password)) {
+      $_SESSION['email'] = $user->email;
+      $_SESSION['name'] = $user->name;
+      $_SESSION['id'] = $user->id;
 
       return true;
     }

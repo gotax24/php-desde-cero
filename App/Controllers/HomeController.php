@@ -9,16 +9,8 @@ class HomeController
   public function show()
   {
     $name = "Ernesto";
-
-    $tasks = Task::all();
-
-    $tareasCompletas = array_filter($tasks, function ($task) {
-      return $task->completed;
-    });
-
-    $tareasIncompletas = array_filter($tasks, function ($task) {
-      return !$task->completed;
-    });
+    $tareasCompletas = Task::where('completed', true)->get();
+    $tareasIncompletas = Task::where('completed', false)->get();
 
     return view('index', [
       'name' => $name,
